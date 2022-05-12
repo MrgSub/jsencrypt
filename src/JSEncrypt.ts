@@ -89,13 +89,14 @@ export class JSEncrypt {
      * components of the rsa key object. Note that if the object was not set will be created
      * on the fly (by the getKey method) using the parameters passed in the JSEncrypt constructor
      * @param {string} str the string to encrypt
+     * @param getRandomValues
      * @return {string} the encrypted string encoded in base64
      * @public
      */
-    public encrypt(str:string) {
+    public encrypt(str:string, getRandomValues:any) {
         // Return the encrypted string.
         try {
-            return hex2b64(this.getKey().encrypt(str));
+            return hex2b64(this.getKey().encrypt(str, getRandomValues));
         } catch (ex) {
             return false;
         }

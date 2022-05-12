@@ -1,3 +1,3 @@
 export declare class SecureRandom {
-    nextBytes(ba: number[]): void;
+    nextBytes(ba: number[], getRandomValues?: any): void;
 }

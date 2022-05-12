@@ -54,10 +54,11 @@ export declare class JSEncrypt {
      * components of the rsa key object. Note that if the object was not set will be created
      * on the fly (by the getKey method) using the parameters passed in the JSEncrypt constructor
      * @param {string} str the string to encrypt
+     * @param getRandomValues
      * @return {string} the encrypted string encoded in base64
      * @public
      */
-    encrypt(str: string): string | false;
+    encrypt(str: string, getRandomValues: any): string | false;
     /**
      * Proxy method for RSAKey object's sign.
      * @param {string} str the string to sign

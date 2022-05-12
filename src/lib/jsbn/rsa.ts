@@ -40,7 +40,7 @@ function pkcs1pad1(s:string, n:number) {
 }
 
 // PKCS#1 (type 2, random) pad input string s to n bytes, and return a bigint
-function pkcs1pad2(s:string, n:number) {
+function pkcs1pad2(s:string, n:number, getRandomValues:any) {
     if (n < s.length + 11) { // TODO: fix for utf-8
 
         console.error("Message too long for RSA");
@@ -67,7 +67,7 @@ function pkcs1pad2(s:string, n:number) {
     while (n > 2) { // random non-zero pad
         x[0] = 0;
         while (x[0] == 0) {
-            rng.nextBytes(x);
+            rng.nextBytes(x, getRandomValues);
         }
         ba[--n] = x[0];
     }
@@ -133,9 +133,9 @@ export class RSAKey {
 
     // RSAKey.prototype.encrypt = RSAEncrypt;
     // Return the PKCS#1 RSA encryption of "text" as an even-length hex string
-    public encrypt(text:string) {
+    public encrypt(text:string, getRandomValues:any) {
         const maxLength = (this.n.bitLength() + 7) >> 3;
-        const m = pkcs1pad2(text, maxLength);
+        const m = pkcs1pad2(text, maxLength, getRandomValues);
 
         if (m == null) {
             return null;
@@ -150,7 +150,7 @@ export class RSAKey {
 
         // fix zero before result
         for (let i = 0; i < maxLength * 2 - length; i++) {
-            h = "0" + h;    
+            h = "0" + h;
         }
 
         return h

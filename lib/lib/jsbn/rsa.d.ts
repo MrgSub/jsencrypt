@@ -4,7 +4,7 @@ export declare class RSAKey {
     doPublic(x: BigInteger): BigInteger;
     doPrivate(x: BigInteger): BigInteger;
     setPublic(N: string, E: string): void;
-    encrypt(text: string): string;
+    encrypt(text: string, getRandomValues: any): string;
     setPrivate(N: string, E: string, D: string): void;
     setPrivateEx(N: string, E: string, D: string, P: string, Q: string, DP: string, DQ: string, C: string): void;
     generate(B: number, E: string): void;
